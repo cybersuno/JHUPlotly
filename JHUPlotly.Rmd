@@ -1,0 +1,46 @@
+---
+title: "JHU Plotly Presentation"
+author: "cybersuno"
+date: "7/2/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Plotly Example
+
+```{r presentation,warning=FALSE, message=FALSE}
+suppressPackageStartupMessages(library(plotly))
+suppressPackageStartupMessages(library(tidyr))
+#data preparation
+#conver the data to data frame
+wp<-as.data.frame(WorldPhones)
+#add the year (row index as a column)
+wp$year<-rownames(wp)
+#pivot column information about region
+wp<-wp %>% pivot_longer(!year,names_to="area",values_to="count")
+#plot the waterfall graph
+plot_ly(wp,x=~year,y=~count,frame=~area,type="waterfall",name="#Phones")
+
+```
+
+## Code used
+
+This is the code used:
+```{r showcode,echo=TRUE,eval=FALSE,warning=FALSE, message=FALSE}
+suppressPackageStartupMessages(library(plotly))
+suppressPackageStartupMessages(library(tidyr))
+#data preparation
+#conver the data to data frame
+wp<-as.data.frame(WorldPhones)
+#add the year (row index as a column)
+wp$year<-rownames(wp)
+#pivot column information about region
+wp<-wp %>% pivot_longer(!year,names_to="area",values_to="count")
+#plot the waterfall graph
+plot_ly(wp,x=~year,y=~count,frame=~area,type="waterfall",name="#Phones")
+
+```
+
